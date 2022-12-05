@@ -1,6 +1,26 @@
 #include <stdio.h>
 #include "stdlib.h"
+#include <stdbool.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <string.h>
 
+
+typedef enum {
+  TK_RESERVED, // symbols
+  TK_NUM, // integer tokens
+  TK_EOF, // end of file
+} TokenKind;
+
+typedef struct Token Token;
+
+// token structure
+struct Token{
+  TokenKind kind; // token type
+  Token * next; // next token
+  int val; // value if TokneKind == TK_NUM
+  char *str; // token string
+};
 
 int main(int argc, char **argv) {
   if (argc != 2){
