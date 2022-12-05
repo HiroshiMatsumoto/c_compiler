@@ -22,6 +22,19 @@ struct Token{
   char *str; // token string
 };
 
+// current token
+Token *token;
+
+
+// error function
+void error(char *fmt, ...){
+  va_list ap;
+  va_start(ap, fmt);
+  vfprintf(stderr, fmt, ap);
+  fprintf(stderr, "\n");
+  exit(1);
+}
+
 int main(int argc, char **argv) {
   if (argc != 2){
     fprintf(stderr, "not correct number of arguments");
