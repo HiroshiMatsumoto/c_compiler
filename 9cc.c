@@ -104,6 +104,23 @@ Token *tokenize(char *p){
   return head.next;
 }
 
+
+char *user_input;
+
+void error_at(char* loc, char* fmt, ...){
+  va_list ap;
+  va_start(ap, fmt);
+
+  int pos = loc - user_input;
+  fprintf(stderr, "%s\n", user_input);
+  fprintf(stderr, "%*s", pos, " ");
+  fprintf(stderr, "^ ");
+  fprintf(stderr, fmt, ap);
+  fprintf(stderr, "\n");
+  exit(1);
+  
+}
+
 int main(int argc, char **argv) {
   if (argc != 2){
     fprintf(stderr, "not correct number of arguments");
@@ -116,6 +133,7 @@ int main(int argc, char **argv) {
   printf(".intel_syntax noprefix\n");
   printf(".globl main\n");
   printf("main:\n");
+
   printf("\tmov rax, %d\n", expect_number());
 
   // assembly output
